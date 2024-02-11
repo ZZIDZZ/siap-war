@@ -3,15 +3,19 @@ import os
 import requests
 import json
 import time
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # default periodic delay: 10 seconds
-delay = int(os.environ.get('DELAY'))
+delay = int(os.getenv('DELAY'))
 while True:
     output = irswar.send_irs_request()
     if "AVAILABLE" in output:
         current_time = time.strftime("%H:%M:%S", time.localtime())
         output = f"{current_time}\n{output}"
-        webhook_url = os.environ.get('WEBHOOK_URL')
+        webhook_url = os.getenv('WEBHOOK_URL')
+        print(webhook_url)
         url = webhook_url
         data = {
             "content": output

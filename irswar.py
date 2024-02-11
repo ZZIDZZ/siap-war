@@ -4,9 +4,12 @@ import os
 from htmldom import htmldom
 import requests
 import json
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # get sia_app_session from env
-sia_app_session = os.environ.get('SIA_APP_SESSION')
+sia_app_session = os.getenv('SIA_APP_SESSION')
 
 url = 'https://siap.undip.ac.id/irs/mhs/irs/ajax_irs_data/table'
 cookies = {'sia_app_session': sia_app_session}
